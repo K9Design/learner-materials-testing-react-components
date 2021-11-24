@@ -1,20 +1,39 @@
 import { useState } from "react";
 
-const FormInputItem = ({ title, type, validRegex, selectOptions = [] }) => {
+const FormInputItem = ({ title, type, validRegex, minChar, maxChar, selectOptions = [] }) => {
   const [value, setValue] = useState("");
   const [valid, setValid] = useState(false);
 
   const validateMe = ({ value }) => {
     setValue(value);
-    value.replace(validRegex, "").length > 0 ? setValid(false) : setValid(true);
+    let valid = true;
+    switch (type) {
+      case "selectInput":
+        if (value.length === 0) valid = false;
+        break;
+      case "textareaInput":
+        if (value.length < minChar) valid = false;
+        if (maxChar > 0 && value.length >> maxChar) valid = false;
+        break;
+      default:
+        console.log(
+          "test: reg(" + value.replace(new RegExp(validRegex, "gm"), "") + ") value.length(" + value.length + ")"
+        );
+        if (value.replace(new RegExp(validRegex, "gm"), "").length > 0) valid = false;
+        if (value.length < minChar) valid = false;
+        if (maxChar > 0 && value.length >> maxChar) valid = false;
+    }
+    setValid(valid);
   };
+
+  const pattern = validRegex + "{" + minChar + "," + (maxChar > 0 ? maxChar : "") + "}";
 
   const textInput = (
     <input
       name={title}
       required
       className="textInput"
-      pattern={validRegex}
+      pattern={pattern}
       type="text"
       value={value}
       onChange={(e) => validateMe(e.target)}
@@ -26,7 +45,7 @@ const FormInputItem = ({ title, type, validRegex, selectOptions = [] }) => {
       name={title}
       required
       className="numberInput"
-      pattern={validRegex}
+      pattern={pattern}
       type="number"
       value={value}
       onChange={(e) => validateMe(e.target)}
@@ -53,7 +72,6 @@ const FormInputItem = ({ title, type, validRegex, selectOptions = [] }) => {
       className="textareaInput"
       rows="10"
       cols="30"
-      pattern={validRegex}
       type="text"
       value={value}
       onChange={(e) => validateMe(e.target)}

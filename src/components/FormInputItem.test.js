@@ -7,7 +7,9 @@ describe("Testing text input field", () => {
     const data = {
       title: "test title",
       type: "textInput",
-      validRegex: "[A-Za-z]{1,}",
+      validRegex: "[A-Za-z]",
+      minChar: "0",
+      maxChar: "3",
     };
     render(<FormInputItem {...data} />);
     const sample = screen.getByText(/test title/i);
@@ -18,7 +20,9 @@ describe("Testing text input field", () => {
     const data = {
       title: "test title",
       type: "textInput",
-      validRegex: "[A-Za-z]{1,}",
+      validRegex: "[A-Za-z]",
+      minChar: "0",
+      maxChar: "3",
     };
     render(<FormInputItem {...data} />);
     const inputField = screen.getByRole("textbox");
@@ -31,7 +35,9 @@ describe("Testing text input field", () => {
     const data = {
       title: "test title",
       type: "textInput",
-      validRegex: "[A-Za-z]{1,}",
+      validRegex: "[A-Za-z]",
+      minChar: "0",
+      maxChar: "3",
     };
     render(<FormInputItem {...data} />);
     const inputField = screen.getByRole("textbox");
@@ -46,7 +52,9 @@ describe("Testing text area input field", () => {
     const data = {
       title: "test text",
       type: "textareaInput",
-      validRegex: "[sS]{1,}",
+      validRegex: "[sS]",
+      minChar: "0",
+      maxChar: "3",
     };
     render(<FormInputItem {...data} />);
     const sample = screen.getByText(/test text/i);
@@ -57,7 +65,9 @@ describe("Testing text area input field", () => {
     const data = {
       title: "test title",
       type: "textareaInput",
-      validRegex: "[sS]{1,}",
+      validRegex: "[sS]",
+      minChar: "0",
+      maxChar: "3",
     };
     render(<FormInputItem {...data} />);
     const inputField = screen.getByRole("textbox");
@@ -70,7 +80,9 @@ describe("Testing text area input field", () => {
     const data = {
       title: "test title",
       type: "textareaInput",
-      validRegex: "[sS]{1,}",
+      validRegex: "[sS]",
+      minChar: "15",
+      maxChar: "-1",
     };
     render(<FormInputItem {...data} />);
     const inputField = screen.getByRole("textbox");

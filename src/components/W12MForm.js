@@ -1,18 +1,12 @@
-import { useState } from "react";
 import W12MHeader from "./W12MHeader";
 import FormInputItem from "./FormInputItem";
-import userEvent from "@testing-library/user-event";
 
 const W12MForm = () => {
   const printResults = () => {
-    let results = "";
     const form = document.getElementsByClassName("Form")[0];
     let formItems = form.getElementsByTagName("input");
     formItems = [...formItems, ...form.getElementsByTagName("textarea")];
     formItems = [...formItems, ...form.getElementsByTagName("select")];
-
-    console.log("formItems: ", formItems);
-
     console.log("form results: ", formItems.map((item) => item.name + " : " + item.value).join(", "));
   };
   return (
@@ -24,13 +18,7 @@ const W12MForm = () => {
         <FormInputItem title="Planet Name" type="textInput" validRegex="[A-Za-z0-9]" minChar="2" maxChar="49" />
         <FormInputItem title="Number of beings" type="numberInput" validRegex="[0-9]" minChar="10" maxChar="-1" />
         <FormInputItem title="What is 2 + 2" type="selectInput" selectOptions={["4", "Not 4"]} />
-        <FormInputItem
-          title="Reason for sparing"
-          type="textareaInput"
-          validRegex="[\s\S]{17,153}"
-          minChar="3"
-          maxChar="23"
-        />
+        <FormInputItem title="Reason for sparing" type="textareaInput" validRegex="[sS]" minChar="17" maxChar="153" />
       </div>
       <button onClick={(e) => printResults(e)}>Send</button>
       <p></p>
