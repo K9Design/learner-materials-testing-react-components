@@ -16,9 +16,6 @@ const FormInputItem = ({ title, type, validRegex, minChar, maxChar, selectOption
         if (maxChar > 0 && value.length >> maxChar) valid = false;
         break;
       default:
-        console.log(
-          "test: reg(" + value.replace(new RegExp(validRegex, "gm"), "") + ") value.length(" + value.length + ")"
-        );
         if (value.replace(new RegExp(validRegex, "gm"), "").length > 0) valid = false;
         if (value.length < minChar) valid = false;
         if (maxChar > 0 && value.length >> maxChar) valid = false;
